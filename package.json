@@ -26,6 +26,7 @@
     "sinon": "6.1.5"
   },
   "dependencies": {
+    "@tryghost/content-api": "file:../SDKs/packages/content-api",
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "gatsby-node-helpers": "^0.3.0",
