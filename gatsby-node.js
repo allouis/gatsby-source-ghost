@@ -6,13 +6,24 @@ exports.sourceNodes = ({boundActionCreators}, configOptions) => {
 
     return GhostAPI
         .fetchAllPosts(configOptions)
-        .then((posts) => {
+        .then(([posts, pages]) => {
             posts.forEach((post) => {
-                if (post.page) {
-                    createNode(PageNode(post));
-                } else {
-                    createNode(PostNode(post));
+                createNode(PostNode(post));
+
+                if (post.tags) {
+                    post.tags.forEach((tag) => {
+                        createNode(TagNode(tag));
+                    });
                 }
+
+                if (post.authors) {
+                    post.authors.forEach((author) => {
+                        createNode(AuthorNode(author));
+                    });
+                }
+            });
+            pages.forEach((post) => {
+                createNode(PageNode(post));
 
                 if (post.tags) {
                     post.tags.forEach((tag) => {
